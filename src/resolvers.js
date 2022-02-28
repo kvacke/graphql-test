@@ -30,7 +30,15 @@ const getProductUnit = (productUnitId, imei, serialNumber) => {
       "Only one identifier is allowed when querying product units."
     );
   }
-  return productUnits.find((pu) => pu.header.id === productUnitId);
+  if (productUnitId) {
+    return productUnits.find((pu) => pu.header.id === productUnitId);
+  }
+  if (imei) {
+    return productUnits.find((pu) => pu.data.imei === imei);
+  }
+  if (serialNumber) {
+    return productUnits.find((pu) => pu.data.serialNumber === serialNumber);
+  }
 };
 
 module.exports = { getProductUnit };
